@@ -43,6 +43,16 @@ class pongBall(Widget):
 	def move(self):
 		self.pos = Vector(*self.velocity) + self.pos
 
+class pongPaddle(Widet):
+	
+	score = NumericProperty(0)
+
+	def bounce_ball(self, ball):
+		if self.collide_widget(ball):
+			vx, vy = ball.velocity
+			speedup = 1.1
+			offset = 0.02 * Vector(0, ball.center_y-self,center_y)
+			ball.velocity = speedup * (offset - ball.velocity)
 
 class pongApp(App):
     def build(self):
